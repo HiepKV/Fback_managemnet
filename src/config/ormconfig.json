@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "loaclhost",  
+  "port": 5432,
+  "username": "admin",
+  "password": "root",
+  "database": "testFproject",
+  "entities": ["dist/**/*.entity{.ts,.js}", "src/entities/**/*.entity{.ts,.js}"],
+  "migrations": ["dist/migrations/*.js", "src/migrations/*.ts"], 
+  "synchronize": true
+}
