@@ -21,7 +21,7 @@ export class Employee {
   @Column({ default: true })
   is_active: boolean;
 
-  @ManyToOne(() => Department, department => department.employees)
+  @ManyToOne(() => Department, department => department.depart_id)
   department: Department;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

@@ -12,14 +12,15 @@ const employees_service_1 = require("./employees.service");
 const employees_entity_1 = require("./entites/employees.entity");
 const employees_controller_1 = require("./employees.controller");
 const typeorm_1 = require("@nestjs/typeorm");
+const auth_module_1 = require("../auth/auth.module");
 let EmployeeModule = class EmployeeModule {
 };
 exports.EmployeeModule = EmployeeModule;
 exports.EmployeeModule = EmployeeModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([employees_entity_1.Employee])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([employees_entity_1.Employee]), (0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [employees_controller_1.EmployeeController],
-        providers: [employees_service_1.EmployeeService, typeorm_1.TypeOrmModule],
+        providers: [employees_service_1.EmployeeService],
     })
 ], EmployeeModule);
 //# sourceMappingURL=employees.module.js.map

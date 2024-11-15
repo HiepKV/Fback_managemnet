@@ -10,7 +10,7 @@ export class EmployeeService {
     constructor(
        @InjectRepository(Employee)
        private employeeRepository: Repository<Employee>,
-       private authService: AuthService 
+       private readonly authService: AuthService 
     ) { }
 
     async getEmployeeByUsername(username: string): Promise<Employee | null> {

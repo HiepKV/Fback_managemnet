@@ -40,7 +40,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], Employee.prototype, "is_active", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => department_entity_1.Department, department => department.employees),
+    (0, typeorm_1.ManyToOne)(() => department_entity_1.Department, department => department.depart_id),
     __metadata("design:type", department_entity_1.Department)
 ], Employee.prototype, "department", void 0);
 __decorate([

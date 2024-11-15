@@ -3,5 +3,5 @@ export declare class Department {
     depart_id: number;
     name: string;
     number_room: number;
-    employees: Employee[];
+    employees: Employee;
 }

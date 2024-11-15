@@ -7,9 +7,9 @@ import { AuthModule } from 'src/auth/auth.module';
 
 
 @Module({
-    imports: [ TypeOrmModule.forFeature([Employee])],
+    imports: [ TypeOrmModule.forFeature([Employee]), forwardRef(() => AuthModule)],
     controllers: [EmployeeController],
-    providers: [EmployeeService, TypeOrmModule],
+    providers: [EmployeeService],
 })
 
 export class EmployeeModule { }

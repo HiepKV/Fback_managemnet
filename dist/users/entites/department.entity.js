@@ -28,8 +28,9 @@ __decorate([
     __metadata("design:type", Number)
 ], Department.prototype, "number_room", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => employees_entity_1.Employee, employee => employee.department),
-    __metadata("design:type", Array)
+    (0, typeorm_1.OneToMany)(() => employees_entity_1.Employee, employee => employee.id),
+    (0, typeorm_1.JoinColumn)({ name: 'id_department' }),
+    __metadata("design:type", employees_entity_1.Employee)
 ], Department.prototype, "employees", void 0);
 exports.Department = Department = __decorate([
     (0, typeorm_1.Entity)()
