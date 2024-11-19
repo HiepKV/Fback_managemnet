@@ -29,6 +29,8 @@ exports.AppModule = AppModule = __decorate([
                 database: process.env.POSTGRES_DB,
                 autoLoadEntities: true,
                 synchronize: true,
+                entities: ['dist/**/*.entity{.ts,.js}'],
+                migrations: ['dist/migrations/*.js']
             }),
             employees_module_1.EmployeeModule
         ],

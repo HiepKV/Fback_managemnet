@@ -17,6 +17,8 @@ dotenv.config();
       database: process.env.POSTGRES_DB ,
       autoLoadEntities: true,
       synchronize: true,
+      entities: ['dist/**/*.entity{.ts,.js}'],
+      migrations: ['dist/migrations/*.js']
     }),
     EmployeeModule
   ],
