@@ -23,6 +23,13 @@ let EmployeeService = class EmployeeService {
         this.employeeRepository = employeeRepository;
         this.authService = authService;
     }
+    async createEmployee(signupBody) {
+        const hashedPassword = this.authService.generatePassword(signupBody.password);
+        signupBody.password = hashedPassword;
+        delete signupBody.passwordConfirm;
+        const employee = await this.employeeRepository.save(signupBody);
+        return employee;
+    }
     async getEmployeeByUsername(username) {
         const employee = await this.employeeRepository.findOneBy({ username });
         return employee;

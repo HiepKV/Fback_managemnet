@@ -8,13 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmployeeController = void 0;
 const common_1 = require("@nestjs/common");
+const employees_entity_1 = require("./entites/employees.entity");
 const employees_service_1 = require("./employees.service");
 let EmployeeController = class EmployeeController {
     constructor(employeeService) {
         this.employeeService = employeeService;
+    }
+    async createEmployee(employee) {
+        return this.employeeService.createEmployee(employee);
     }
     async getAllEmployees() {
         const employees = await this.employeeService.getAllEmployees();
@@ -23,7 +30,14 @@ let EmployeeController = class EmployeeController {
 };
 exports.EmployeeController = EmployeeController;
 __decorate([
-    (0, common_1.Get)('employees/all'),
+    (0, common_1.Post)('add'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [employees_entity_1.Employee]),
+    __metadata("design:returntype", Promise)
+], EmployeeController.prototype, "createEmployee", null);
+__decorate([
+    (0, common_1.Get)('all'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
