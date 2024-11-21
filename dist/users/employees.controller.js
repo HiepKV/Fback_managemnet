@@ -14,14 +14,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmployeeController = void 0;
 const common_1 = require("@nestjs/common");
-const employees_entity_1 = require("./entites/employees.entity");
 const employees_service_1 = require("./employees.service");
 let EmployeeController = class EmployeeController {
     constructor(employeeService) {
         this.employeeService = employeeService;
     }
-    async createEmployee(employee) {
-        return this.employeeService.createEmployee(employee);
+    async getEmployeeById(id) {
+        const employee = await this.employeeService.getEmployeeById(id);
+        return employee;
+    }
+    async getEmployeeByUsername(username) {
+        const employee = await this.employeeService.getEmployeeByUsername(username);
+        return employee;
     }
     async getAllEmployees() {
         const employees = await this.employeeService.getAllEmployees();
@@ -30,12 +34,19 @@ let EmployeeController = class EmployeeController {
 };
 exports.EmployeeController = EmployeeController;
 __decorate([
-    (0, common_1.Post)('add'),
+    (0, common_1.Get)('employee/id'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [employees_entity_1.Employee]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], EmployeeController.prototype, "createEmployee", null);
+], EmployeeController.prototype, "getEmployeeById", null);
+__decorate([
+    (0, common_1.Get)('employee/me'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], EmployeeController.prototype, "getEmployeeByUsername", null);
 __decorate([
     (0, common_1.Get)('all'),
     __metadata("design:type", Function),

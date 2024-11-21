@@ -3,6 +3,7 @@ import { EmployeeService } from "./employees.service";
 export declare class EmployeeController {
     private readonly employeeService;
     constructor(employeeService: EmployeeService);
-    createEmployee(employee: Employee): Promise<Employee>;
+    getEmployeeById(id: number): Promise<Employee>;
+    getEmployeeByUsername(username: string): Promise<Employee>;
     getAllEmployees(): Promise<Employee[]>;
 }

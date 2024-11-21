@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const login_dto_1 = require("./dto/login.dto");
 const employees_service_1 = require("../users/employees.service");
+const signup_dto_1 = require("./dto/signup.dto");
 let AuthController = class AuthController {
     constructor(authService, employeeService) {
         this.authService = authService;
@@ -25,9 +26,16 @@ let AuthController = class AuthController {
     async login(body) {
         const employee = await this.employeeService.getEmployeeByUsername(body.userName);
         if (!employee || !this.authService.checkPassword(body.password, employee.password)) {
-            throw new common_1.UnauthorizedException();
+            throw new common_1.UnauthorizedException("Wrong username or password");
         }
         const token = await this.authService.createAccessToken(employee);
+        return {
+            accessToken: token
+        };
+    }
+    async signup(body) {
+        const newEmployee = await this.employeeService.createEmployee(body);
+        const token = await this.authService.createAccessToken(newEmployee);
         return {
             accessToken: token
         };
@@ -42,6 +50,14 @@ __decorate([
     __metadata("design:paramtypes", [login_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, common_1.Post)('/signup'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [signup_dto_1.SignupDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "signup", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __param(1, (0, common_1.Inject)((0, common_1.forwardRef)(() => employees_service_1.EmployeeService))),

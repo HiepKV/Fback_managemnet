@@ -1,12 +1,8 @@
-import { Exclude, Expose, plainToInstance } from "class-transformer";
-import { Employee } from "src/users/entites/employees.entity";
-
-@Exclude()
+import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
 export class LoginDto {
-
-    @Expose()
+    @IsNotEmpty()
     userName: string;
 
-    @Expose()
+    @IsNotEmpty()
     password: string;
 }

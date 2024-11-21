@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post , } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post , } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Employee } from "./entites/employees.entity";
@@ -10,9 +10,15 @@ export class EmployeeController {
         private readonly employeeService: EmployeeService
         
     ) { }
-    @Post('add')
-    async createEmployee(@Body() employee: Employee) {
-        return this.employeeService.createEmployee(employee);
+    @Get('employee/id')
+    async getEmployeeById(@Body() id: number) {
+        const employee = await this.employeeService.getEmployeeById(id)
+        return employee;
+    }
+    @Get('employee/me')
+    async getEmployeeByUsername(@Body() username: string) {
+        const employee = await this.employeeService.getEmployeeByUsername(username)
+        return employee;
     }
     @Get('all')
     async getAllEmployees() {

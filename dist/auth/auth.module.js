@@ -14,14 +14,24 @@ const jwt_1 = require("@nestjs/jwt");
 const employees_service_1 = require("../users/employees.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const employees_entity_1 = require("../users/entites/employees.entity");
+const config_1 = require("@nestjs/config");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot(),
             typeorm_1.TypeOrmModule.forFeature([employees_entity_1.Employee]),
-            jwt_1.JwtModule.register({})
+            jwt_1.JwtModule.registerAsync({
+                imports: [config_1.ConfigModule],
+                useFactory: (configService) => ({
+                    global: true,
+                    secret: configService.get('JWT_SECRET') || 'SecretCuaHiep',
+                    signOptions: { expiresIn: '7d' },
+                }),
+                inject: [config_1.ConfigService],
+            }),
         ],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService, employees_service_1.EmployeeService],
