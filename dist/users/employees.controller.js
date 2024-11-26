@@ -31,18 +31,23 @@ let EmployeeController = class EmployeeController {
         const employees = await this.employeeService.getAllEmployees();
         return employees;
     }
+    async deleteEmployeeById(id) {
+        const employee = await this.employeeService.deleteEmployeeById(id);
+        console.log("Completed");
+        return employee;
+    }
 };
 exports.EmployeeController = EmployeeController;
 __decorate([
-    (0, common_1.Get)('employee/id'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('employee/id/:id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], EmployeeController.prototype, "getEmployeeById", null);
 __decorate([
-    (0, common_1.Get)('employee/me'),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Get)('employee/username/:username'),
+    __param(0, (0, common_1.Param)('username')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
@@ -53,6 +58,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], EmployeeController.prototype, "getAllEmployees", null);
+__decorate([
+    (0, common_1.Delete)('delete/id'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], EmployeeController.prototype, "deleteEmployeeById", null);
 exports.EmployeeController = EmployeeController = __decorate([
     (0, common_1.Controller)('employees'),
     __metadata("design:paramtypes", [employees_service_1.EmployeeService])

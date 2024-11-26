@@ -26,12 +26,24 @@ export class EmployeeService {
     }
     async getEmployeeById(id: number): Promise<Employee | null> {
         const employee = await this.employeeRepository.findOneBy({ id });
+        if(!employee) this.throwUserNotFoundError();
         return employee;    
     }
     async getAllEmployees(): Promise<Employee[]> {
         const employees = await this.employeeRepository.find();
         return employees;
     }
+
+    async deleteEmployeeById(id: number): Promise<void> {
+        await this.employeeRepository.delete(id);
+    }
+    async throwUserNotFoundError() {
+        throw new Error('User not found');
+    }
+    async throwUserAlreadyExistsError() {
+        throw new Error('User already exists');
+    }
+    
 }
 
 

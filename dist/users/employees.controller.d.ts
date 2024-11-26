@@ -6,4 +6,5 @@ export declare class EmployeeController {
     getEmployeeById(id: number): Promise<Employee>;
     getEmployeeByUsername(username: string): Promise<Employee>;
     getAllEmployees(): Promise<Employee[]>;
+    deleteEmployeeById(id: number): Promise<void>;
 }

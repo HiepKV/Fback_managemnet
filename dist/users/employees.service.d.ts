@@ -10,4 +10,7 @@ export declare class EmployeeService {
     getEmployeeByUsername(username: string): Promise<Employee | null>;
     getEmployeeById(id: number): Promise<Employee | null>;
     getAllEmployees(): Promise<Employee[]>;
+    deleteEmployeeById(id: number): Promise<void>;
+    throwUserNotFoundError(): Promise<void>;
+    throwUserAlreadyExistsError(): Promise<void>;
 }
